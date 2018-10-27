@@ -49,7 +49,13 @@ app.get('/auth/google/callback',
     delete req.session.oauth2return;
     res.redirect(redirect);
   })
-
+  app.get('/status',(req,res)=>{
+    if(req.user) {
+      res.send('you are logged in')
+    }  else {
+      res.send('you are NOT logged in')
+    }
+  })
   app.use('/',express.static('build'))
   app.use('/public',express.static('public'))
 
