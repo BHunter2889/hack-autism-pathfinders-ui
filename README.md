@@ -1,4 +1,5 @@
-https://dashboard.heroku.com/apps/hack-autism-pathfinders-app
+Heroku Dashboard: https://dashboard.heroku.com/apps/hack-autism-pathfinders-app
+Heroku App: https://hack-autism-pathfinders-app.herokuapp.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
