@@ -11,7 +11,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import FolderShared from '@material-ui/icons/FolderShared';
 import CalendarIcon from '@material-ui/icons/CalendarToday';
 import {Link} from "react-router-dom";
-import {ROUTE_CALENDAR, ROUTE_CONTACTS, ROUTE_DOCS, ROUTE_FAVORITES, ROUTE_FORMS, ROUTE_HOME} from "./RootComponent";
+import {ROUTE_CALENDAR, ROUTE_CONTACTS, ROUTE_DOCS, ROUTE_FAVORITES, ROUTE_FORMS, ROUTE_HOME} from "./components/AppComponent";
 
 
 export const getSideMenuNavItems = () => (

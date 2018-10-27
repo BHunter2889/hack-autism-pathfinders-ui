@@ -1,5 +1,6 @@
 import {combineReducers}        from 'redux';
-import isSidePanelCollapsed     from './IsSidePanelCollapsed';
+import Forms                    from './Forms';
+
 export default () => combineReducers({
-    isSidePanelCollapsed
+    Forms
 });
