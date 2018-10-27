@@ -23,19 +23,24 @@ code {
 
 .team-dashboard-container {
     padding-top: 20px;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 350px);
 }
 
 .upcoming-events-container {
     padding-top: 20px;
-    height: 295px;
+    height: 345px;
+    overflow: hidden;
+}
+
+.team-member-profile-thumbnail {
+    float: left;
 }
 
 .profile-image-circle-mini {
     display: inline-block;
     margin-right: 10px;
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 

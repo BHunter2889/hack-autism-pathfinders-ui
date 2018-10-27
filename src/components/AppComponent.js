@@ -100,11 +100,10 @@ class RootComponent extends React.Component {
     constructor(props) {
         super(props);
         // TODO - uncomment these when we hook up the api calls
-        props.fetchDocs();
-        props.fetchForms();
-        props.fetchTeam();
-        props.fetchContacts();
-
+        // props.fetchDocs();
+        // props.fetchForms();
+        // props.fetchTeam();
+        // props.fetchContacts();
         // Basic Fetch Test:
         // console.log("Trying to hit stuff");
         // fetch('/stuff')
