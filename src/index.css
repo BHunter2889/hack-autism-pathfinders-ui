@@ -16,3 +16,7 @@ code {
 .menu-items a {
     text-decoration: none;
 }
+
+.app-body {
+    text-align: center;
+}

@@ -1,7 +1,8 @@
 import {connect}        from 'react-redux';
-import Home   from '../components/HomeComponent';
+import HomeComponent   from '../components/HomeComponent';
 
 const mapStateToProps = (state) => ({
+    team: state.Team
 });
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, null)(HomeComponent);

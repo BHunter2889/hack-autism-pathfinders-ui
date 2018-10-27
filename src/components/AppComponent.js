@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Route, Router, Switch} from 'react-router-dom'
+import {Redirect, Route, Router, Switch} from 'react-router-dom'
 import history from '../utils/history';
-import Home from './HomeComponent';
+import HomeContainer from '../containers/HomeContainer';
 
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
@@ -17,6 +17,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {getSideMenuNavItems} from '../SideMenuNavItems';
+import ContactsContainer from "../containers/ContactsContainer";
+import DocsContainer from "../containers/DocsContainer";
+import FormsContainer from "../containers/FormsContainer";
+import ComingSoonComponent from "./ComingSoonComponent";
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -100,6 +104,16 @@ class RootComponent extends React.Component {
         // props.fetchForms();
         // props.fetchTeam();
         // props.fetchContacts();
+
+        // Basic Fetch Test:
+        // console.log("Trying to hit stuff");
+        // fetch('/stuff')
+        //     .then((res) => {
+        //         console.log("the response:", res);
+        //     })
+        //     .catch((err) => {
+        //         console.log("ohh no! error:", err);
+        //     })
     }
 
     state = {
@@ -157,15 +171,19 @@ class RootComponent extends React.Component {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar}/>
-                    <Router history={history}>
-                        <Switch>
-                            <Route path={ROUTE_HOME} component={Home}/>
-                            <Route path={ROUTE_CONTACTS} component={null}/>
-                            <Route path={ROUTE_DOCS} component={null}/>
-                            <Route path={ROUTE_FORMS} component={null}/>
-                            <Route path={ROUTE_CALENDAR} component={null}/>
-                        </Switch>
-                    </Router>
+                    <div className="app-body">
+                        <Router history={history}>
+                            <Switch>
+                                <Route path={ROUTE_HOME} component={HomeContainer}/>
+                                <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
+                                <Route path={ROUTE_DOCS} component={DocsContainer}/>
+                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
+                                <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
+                                <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
+                                <Redirect to={ROUTE_HOME}/>
+                            </Switch>
+                        </Router>
+                    </div>
                 </main>
             </div>
         );
