@@ -39,7 +39,7 @@ app.get('/auth/google',(req, res, next) => {
     }
     next();
   },
-  passport.authenticate('google', { scope: ['email', 'profile','https://www.googleapis.com/auth/drive.metadata.readonly'] }))
+  passport.authenticate('google', { scope: ['email', 'profile','https://www.googleapis.com/auth/drive.file'] }))
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
