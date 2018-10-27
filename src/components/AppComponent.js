@@ -99,11 +99,11 @@ const styles = theme => ({
 class RootComponent extends React.Component {
     constructor(props) {
         super(props);
-        // TODO - uncomment these when we're hook up the api calls
-        // props.fetchDocs();
-        // props.fetchForms();
-        // props.fetchTeam();
-        // props.fetchContacts();
+        // TODO - uncomment these when we hook up the api calls
+        props.fetchDocs();
+        props.fetchForms();
+        props.fetchTeam();
+        props.fetchContacts();
 
         // Basic Fetch Test:
         // console.log("Trying to hit stuff");
@@ -147,7 +147,7 @@ class RootComponent extends React.Component {
                             <MenuIcon/>
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap>
-                            Binder
+                            LifeBinder
                         </Typography>
                     </Toolbar>
                 </AppBar>
