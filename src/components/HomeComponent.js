@@ -67,7 +67,8 @@ class HomeComponent extends Component {
                 </div>
             }
         </div>
-        <TeamMemberModalContainer />
+          {/*//TODO get modal working*/}
+        {/*<TeamMemberModalContainer />*/}
       </div>
     );
   }
