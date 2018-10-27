@@ -5,10 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^3.3.1",
     "@material-ui/icons": "^3.0.1",
-    "classnames": "^2.2.6",
-    "immutable": "^3.8.2",
-    "muicss": "^0.9.39",
     "body-parser": "^1.18.3",
+    "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "connect-pg-simple": "^5.0.0",
     "cookie-parser": "^1.4.3",
@@ -16,12 +14,15 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "googleapis": "^34.0.0",
+    "immutable": "^3.8.2",
+    "muicss": "^0.9.39",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "pg": "^7.6.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "sql.js": "^0.5.0"
   },
   "scripts": {
     "start": "node server.js",
