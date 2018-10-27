@@ -3,7 +3,7 @@ const Pool=require('pg').Pool
 
 // you can optionally supply other values
 var pool=new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL+process.env.APP_ENV==='prod' ? '' : '?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory'
 })
 
 pool.on('error', function (err, client) {
