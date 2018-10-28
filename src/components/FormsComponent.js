@@ -21,7 +21,7 @@ class FormsComponent extends Component {
     console.log("Forms: ", forms)
     console.log("Category: ", this.props.categoryIdx)
     return (
-      <div>
+      <div className="form-card-container">
         {forms.length > 0
           ? forms.map(form => 
           <FormCardContainer form={form} />
