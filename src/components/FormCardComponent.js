@@ -1,9 +1,17 @@
-import React, {Component, Button} from 'react';
-import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions } from '@material-ui/core';
+import React, {Component} from 'react';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 
 class FormCardComponent extends Component {
     constructor(props) {
         super(props);
+        console.log("Form Card Under Construction... ")
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -13,19 +21,22 @@ class FormCardComponent extends Component {
     }
 
     render() {
+        console.log("Rendering Form Card for: ", this.props.form)
         const {form} = this.props;
-
-        const btnImg = form.imgUrl || "fa-icon";
-
+        
+        const btnImg ="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
         return (
             <Card  className="form-card">
-                <CardActionArea onClick={this.handleClick}>
+                <div>
+                <CardActionArea  onClick={this.handleClick}>
+                    <div>
                     <CardMedia 
                         className="form-card-img"
                         image={btnImg}
                         title={form.title}
                     />
                     <CardContent>
+                        <div>
                         <Typography gutterBottom variant="h5" component="h2">
                             {form.title}
                         </Typography>
@@ -33,16 +44,21 @@ class FormCardComponent extends Component {
                             This Form helps you keep track of... 
                             Whatever it's supposed to help you keep track of!
                         </Typography>
+                        </div>
                     </CardContent>
+                    </div>
                 </CardActionArea>
                 <CardActions>
+                    <div>
                     <Button size="small" color="primary">
                         Print
                     </Button>
                     <Button size="small" color="primary">
                         Save PDF
                     </Button>
+                    </div>
                 </CardActions>
+                </div>
             </Card>
         );
     }

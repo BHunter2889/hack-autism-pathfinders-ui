@@ -3,7 +3,8 @@ import AppComponent   from '../components/AppComponent';
 import {doGetContacts, doGetDocs, doGetForms, doGetTeam, doGetUpcomingEvents} from "../actions/api";
 import {SCREEN_RESIZE} from "../reducers/ScreenDimensions";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps
 });
 
 const mapDispatchToProps = (dispatch) => ({
