@@ -14,8 +14,8 @@ create table public.user (
 	token VARCHAR(1000),
 	refreshToken VARCHAR(1000),
 	image_url VARCHAR(1000),
-	pathbinder_folder_id VARCHAR(1000),
-	documents_folder_id VARCHAR(1000),
-	sqlite_file_id VARCHAR(1000),
+	pathbinder_folder_id VARCHAR(5000),
+	documents_folder_id VARCHAR(5000),
+	sqlite_file_id VARCHAR(5000),
 	UNIQUE(google_id)
 );

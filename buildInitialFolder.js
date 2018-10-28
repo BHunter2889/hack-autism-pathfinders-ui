@@ -6,10 +6,12 @@ const driveUploader = require('./driveUploader')
 async function buildInitialFolder(token) {
   const db = new sql.Database();
   db.run(fs.readFileSync('./sqliteMigration/1_create_initial.sql','utf8'));
+var selectDocs = db.prepare("SELECT * FROM form_template WHERE 1=:id");
 
+    console.log('built form rows: ',selectDocs.getAsObject({':id':1}))
   const folderResponse = await driveUploader.makeFolder('PATHbinder',token)
   const documentSubfolder = await driveUploader.makeFolder('Documents',token,folderResponse.data.id)
-  console.log(folderResponse.data.id)
+//  console.log(folderResponse.data.id)
   console.log('uploading sqlite file to google drive...')
   const uploadResponse= await driveUploader.uploadToDrive(
     crypto.encrypt(new Buffer(db.export())),

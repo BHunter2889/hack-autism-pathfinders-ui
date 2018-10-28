@@ -63,23 +63,31 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   // Redirect back to the original page, if any
   (req, res) => {
-    const redirect = req.session.oauth2return || '/';
+    const redirect = req.session.oauth2return || '/status';
     delete req.session.oauth2return;
     res.redirect(redirect);
   })
 
-app.get('/logout', function(req, res){
+app.get('/logout', async function(req, res){
+  await query({
+  			text:`DELETE FROM ${process.env.DBSCHEMA}.session WHERE sid=$1`,
+  			values:[req.sessionID]
+  		})
   req.logout();
   res.redirect('/');
 });
-
+const {downloadFromDrive}=require('./driveUploader')
 app.get('/status',async (req,res)=>{
   if(req.user) {
-  const folderId='0B_lgC0Va_yKOTURGNFdCdzV5UlU'
-  console.log(folderId)
-  console.log(req.user.token)
-    const folderName= await driveCaller.getFolderName(folderId,req.user.token)
-    req.user.folderName=folderName
+    const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
+const result=sqliteDb.exec(`SELECT * FROM sqlite_master`)
+
+console.log(JSON.stringify(result,null,2))
+//    var selectDocs = sqliteDb.prepare("SELECT * FROM form_template WHERE 1=:id");
+//
+//    console.log(selectDocs.getAsObject({':id':1}))
+//    selectDocs.free();
+
     res.json(req.user)
   }  else {
     res.send('you are NOT logged in')
