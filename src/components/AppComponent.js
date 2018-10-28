@@ -6,6 +6,7 @@ import {compose} from 'recompose';
 
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
+
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,6 +29,8 @@ import HomeContainer from '../containers/HomeContainer';
 import FormByIdContainer from "../containers/FormByIdContainer";
 import CalendarContainer from "../containers/CalendarContainer";
 import FormsContainer from '../containers/FormsContainer';
+import ImgIcon from './ImgIcon';
+const lifeBinder = import('../themes/LifeBinderTheme');
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -103,7 +106,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: "linear-gradient(217deg, rgba(240,80,39,.8), rgba(240,80,39,0) 70.71%), linear-gradient(127deg, rgba(248,157,79,.8), rgba(248,157,79,0) 70.71%), linear-gradient(336deg, rgba(240,80,39,.8), rgba(248,157,79,0) 70.71%)",
         // padding: theme.spacing.unit * 3,
     },
     homeBoard: {
@@ -180,8 +183,9 @@ class AppComponent extends React.Component {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Typography variant="title" color="inherit" noWrap>
-                            LifeBinder
+                        <ImgIcon />
+                        <Typography variant="title" color="inherit" style={{display: "inline-flex", flexDirection: 'row', fontSize: '2.5rem' }} noWrap>
+                             LifeBinder
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -201,7 +205,9 @@ class AppComponent extends React.Component {
                     <Divider/>
                     <SideMenuNavItems />
                 </Drawer>
-                <main className={classes.content} style={{width: "100%"}}>
+                <main className={classes.content} style={{width: "100%", 
+                background: "linear-gradient(217deg, rgba(240,80,39,.8), rgba(240,80,39,0) 70.71%), linear-gradient(127deg, rgba(248,157,79,.8), rgba(248,157,79,0) 70.71%), linear-gradient(336deg, rgba(240,80,39,.8), rgba(248,157,79,0) 70.71%)",
+                }}>
                     <div className={classes.toolbar}/>
                     <div className="app-body">
                         <Router history={history}>
