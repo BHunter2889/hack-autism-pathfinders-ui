@@ -4,13 +4,16 @@ import FormCardContainer from '../containers/FormCardContainer';
 import { Typography } from '@material-ui/core';
 
 class FormsComponent extends Component {
+  constructor(props) {
+    super(props);
+    props.fetchForms();
+  }
   render() {
     console.log("ImmaFormsComponent!")
 
     const {forms} = this.props;
 
     if (!forms) {
-      console.log("NO FORMS!!!! AHHHHHHH!!!!!")
         return (
             <div>
                 <CircularProgress size={50} />

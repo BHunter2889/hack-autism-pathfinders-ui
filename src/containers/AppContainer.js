@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
     fetchDocs: () => dispatch(doGetDocs),
     fetchForms: () => dispatch(doGetForms),
-    fetchTeam: () => dispatch(doGetTeam),
     fetchContacts: () => dispatch(doGetContacts),
+    fetchTeam: () => dispatch(doGetTeam),
     fetchUpcomingEvents: () => dispatch(doGetUpcomingEvents),
     updateDimensions: (dimensions) => dispatch({type: SCREEN_RESIZE, dimensions})
 });

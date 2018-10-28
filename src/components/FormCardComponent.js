@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import history from "../utils/history";
+import {ROUTE_FORM_FROM_TEMPLATE} from "./AppComponent";
 
 
 class FormCardComponent extends Component {
@@ -17,7 +19,10 @@ class FormCardComponent extends Component {
 
     handleClick() {
         console.log("trying to click form card");
-        this.props.showFormModal(this.props.form);
+        // this.props.showFormModal(this.props.form);
+        history.push(`${ROUTE_FORM_FROM_TEMPLATE}/0`);
+        // history.push(`${ROUTE_FORM_FROM_TEMPLATE}/${this.props.form.id}`);
+
     }
 
     render() {

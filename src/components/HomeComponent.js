@@ -79,6 +79,8 @@ class HomeComponent extends Component {
             isEditingTeam: false,
             upcomingEvents: props.events ? getUpcomingEvents(props.events.items) : []
         };
+        props.fetchTeam();
+        props.fetchUpcomingEvents();
     }
 
     updateUpcomingEvents() {
@@ -97,7 +99,7 @@ class HomeComponent extends Component {
 
     render() {
 
-        const {show, onClose, member, screenHeight} = this.props;
+        const {show, onClose, member, screenHeight, team} = this.props;
         const {isEditingTeam, upcomingEvents} = this.state;
         return (
             <div>
