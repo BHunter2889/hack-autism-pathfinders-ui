@@ -1,7 +1,7 @@
 import {connect}        from 'react-redux';
 import HomeComponent   from '../components/HomeComponent';
 import {HIDE_MEMBER_MODAL} from "../reducers/IsMemberModalShowing";
-import {events} from "../eventTestData";
+import {events} from "../testData";
 import CalendarComponent from "../components/CalendarComponent";
 
 const mapStateToProps = (state) => ({

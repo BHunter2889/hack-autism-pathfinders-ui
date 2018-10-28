@@ -7,9 +7,9 @@ export default `<!DOCTYPE html>
 
 <style>
 
-body {margin-top: 0px;margin-left: 250px;}
+body {margin-top: 0px;}
 
-#page_1 {position:relative; overflow: hidden;margin: 30px 0px 0px 0px;padding: 0px;border: none;width: 816px;height: 950px;}
+#page_1 {position:relative; overflow: hidden;margin: auto;padding: 0px;border: none;width: 816px;height: 950px;}
 #page_1 #id1_1 {border:none;margin: 228px 0px 0px 0px;padding: 0px;border:none;width: 816px;overflow: hidden;}
 #page_1 #id1_2 {border:none;margin: 10px 0px 0px 0px;padding: 0px;border:none;width: 816px;overflow: hidden;}
 #page_1 #id1_3 {border:none;margin: 8px 0px 0px 0px;padding: 0px;border:none;width: 816px;overflow: hidden;}
@@ -17,7 +17,7 @@ body {margin-top: 0px;margin-left: 250px;}
 #page_1 #p1dimg1 {position:absolute;top:0px;left:0px;z-index:-1;width:816px;height:285px;}
 #page_1 #p1dimg1 #p1img1 {width:816px;height:285px;}
 
-#page_2 {position:relative; overflow: hidden;margin: 0px 0px 28px 0px;padding: 0px;border: none;width: 816px;height: 750px;}
+#page_2 {position:relative; overflow: hidden;margin: auto;padding: 0px;border: none;width: 816px;height: 750px;}
 #page_2 #id2_1 {border:none;margin: 10px 0px 0px 0px;padding: 0px;border:none;width: 816px;overflow: hidden;}
 #page_2 #p2dimg1 {position:absolute;top:0px;left:0px;z-index:-1;width:816px;height:1028px;}
 #page_2 #p2dimg1 #p2img1 {width:816px;height:1028px;}

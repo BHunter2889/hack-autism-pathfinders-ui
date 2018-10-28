@@ -7,10 +7,10 @@ export default `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3
 <META name="generator" content="BCL easyConverter SDK 5.0.140">
 <STYLE type="text/css">
 
-body {margin-top: 0px;margin-left: 250px;}
+body {margin-top: 0px;}
 
 
-#page_3 {position:relative; overflow: hidden;margin:30px 0px 28px 0px;padding: 0px;border: none;width: 816px;height: 950px;}
+#page_3 {position:relative; overflow: hidden;margin:auto;padding: 0px;border: none;width: 816px;height: 950px;}
 #page_3 #id3_1 {border:none;margin: 48px 0px 0px 0px;padding: 0px;border:none;width: 816px;overflow: hidden;}
 #page_3 #id3_2 {border:none;margin: 223px 0px 0px 95px;padding: 0px;border:none;width: 721px;overflow: hidden;}
 

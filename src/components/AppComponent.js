@@ -22,6 +22,7 @@ import ComingSoonComponent from "./ComingSoonComponent";
 import BinderComponent from './BinderComponent';
 import FormByIdContainer from "../containers/FormByIdContainer";
 import CalendarContainer from "../containers/CalendarContainer";
+import ContactsContainer from "../containers/ContactsContainer";
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -200,7 +201,7 @@ class AppComponent extends React.Component {
                         <Router history={history}>
                             <Switch>
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
-                                <Route path={ROUTE_CONTACTS} component={ComingSoonComponent}/>
+                                <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
                                 <Route path={ROUTE_FORM_EDIT} component={FormByIdContainer}/>
                                 <Route path={`${ROUTE_FORM_FROM_TEMPLATE}/:id`} component={FormByIdContainer}/>

@@ -38,6 +38,25 @@ code {
     margin-right: 30px;
 }
 
+.contact-profile-thumbnail {
+    display: inline-block;
+}
+
+.contact-circle-mini {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    overflow: hidden;
+}
+
 .profile-image-circle-mini {
     display: inline-block;
     margin-right: 10px;

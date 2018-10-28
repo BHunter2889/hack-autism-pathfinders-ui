@@ -48,7 +48,7 @@ class FormByIdComponent extends Component {
                                 window.frames[iframeId].print();
                             }}> Print Form </Button>
                         </div>
-                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "90vh"}} srcdoc={form.html} />
+                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh"}} srcdoc={form.html} />
                     </div>
                 }
                 <h3>This is not the form you're looking for...</h3>
