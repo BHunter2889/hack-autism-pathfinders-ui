@@ -10,6 +10,10 @@ import Email from '@material-ui/icons/Email';
 import Card from "@material-ui/core/es/Card/Card";
 
 class ContactsComponent extends Component {
+    constructor(props){
+        super(props);
+        props.fetchContacts();
+    }
   render() {
 
     const {contacts} = this.props;
@@ -41,13 +45,6 @@ class ContactsComponent extends Component {
                           <h3>{contact.name}</h3>
                       </div>
                       <div>
-                          <Chip
-                              avatar={<Avatar><VideoCall/></Avatar>}
-                              label="Video Call"
-                              style={{fontSize: 14, margin: "5px"}}
-                              onClick={() => {/*noop*/
-                              }}
-                          />
                           {contact.numbers && contact.numbers.length > 0 &&
                             contact.numbers.map(number => (
                                 <Chip
