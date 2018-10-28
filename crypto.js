@@ -2,7 +2,7 @@
 
 var crypto = require('crypto'),
     algorithm = 'aes-256-ctr',
-    password = 'd6F3Efeq';
+    password = 'd6F3Efeq'; //todo make this unique to each individual
 
 function encrypt(buffer){
   var cipher = crypto.createCipher(algorithm,password)

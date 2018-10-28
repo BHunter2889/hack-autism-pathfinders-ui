@@ -8,49 +8,48 @@ const db = new sql.Database();
 
 // Execute some sql
 db.run(fs.readFileSync('./sqliteMigration/1_create_initial.sql','utf8')); // Run the query without returning anything
+//const rows = res.map(obj=>obj.columns.reduce((accum,col)=>{[col]:}))
+//console.log(rows)
+/*
 const insertDoc = db.prepare(`INSERT INTO Docs (title,category) VALUES (:title,:category)`)
-insertDoc.bind(['hello',1])
+insertDoc.bind(['hello','category`'])
 insertDoc.step();
 insertDoc.free();
+*/
 
 //write to an encrypted file
 var data = db.export();
 fs.writeFileSync('myEncryptedDb.sqlite',crypto.encrypt(new Buffer(data)))
-var fileBuffer = crypto.decrypt(fs.readFileSync('myEncryptedDb.sqlite'))
+//const enc=fs.readFileSync('db.encrypted')
+const enc=fs.readFileSync('myEncryptedDb.sqlite')
+//console.log(enc)
+var fileBuffer = crypto.decrypt(enc)
+//console.log(fileBuffer)
 const newDb = new sql.Database(fileBuffer)
-var selectDocs = newDb.prepare("SELECT * FROM Docs WHERE id=:id");
+const res=newDb.exec(`SELECT * FROM sqlite_master WHERE type='table'`)
+console.log(JSON.stringify(res,null,2))
 
-console.log(selectDocs.getAsObject({':id':1}))
-selectDocs.free();
-/*
-[
-	{columns:['a','b'], values:[[0,'hello'],[1,'world']]}
-]
-*/
+//var selectDocs = newDb.prepare("SELECT * FROM Docs WHERE id=:id");
 //
-//// Prepare an sql statement
-//var stmt = db.prepare("SELECT * FROM hello WHERE a=:aval AND b=:bval");
-//
-//// Bind values to the parameters and fetch the results of the query
-//var result = stmt.getAsObject({':aval' : 1, ':bval' : 'world'});
-//console.log(result); // Will print {a:1, b:'world'}
-//
-//// Bind other values
-//stmt.bind([0, 'hello']);
-//while (stmt.step()) console.log(stmt.get()); // Will print [0, 'hello']
-//
-//// You can also use javascript functions inside your SQL code
-//// Create the js function you need
-//function add(a, b) {return a+b;}
-//// Specifies the SQL function's name, the number of it's arguments, and the js function to use
-//db.create_function("add_js", add);
-//// Run a query in which the function is used
-//db.run("INSERT INTO hello VALUES (add_js(7, 3), add_js('Hello ', 'world'));"); // Inserts 10 and 'Hello world'
-//
-//// free the memory used by the statement
-//stmt.free();
-//// You can not use your statement anymore once it has been freed.
-//// But not freeing your statements causes memory leaks. You don't want that.
-//
-//// Export the database to an Uint8Array containing the SQLite database file
-//var binaryArray = db.export();
+//console.log(selectDocs.getAsObject({':id':1}))
+//selectDocs.free();
+
+
+const driveUploader = require('./driveUploader')
+async function upload() {
+console.log('uploading...')
+  const token ="ya29.GlxEBi-7-G9hcCq80lmKBKrWc90tXbI9JtVl4gZQlKXmcD4uvLJDMPFrz8Drlm94N8g6bSzztW6tSmDySuHDkfbFp-PJSzJR4pMLE64MdMQaUpseZ5vyRV2MnngurQ"
+  const folderResponse = await driveUploader.makeFolder('PATHbinder',token)
+  console.log(folderResponse.data.id)
+  await driveUploader.uploadToDrive(
+    crypto.encrypt(new Buffer(data)),
+    'db.encrypted',
+    folderResponse.data.id,
+    token,
+    (err,result)=>{
+    console.log('got here now')
+    })
+}
+
+//upload();
+//setTimeout(()=>{console.log('done'),2000})
