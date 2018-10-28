@@ -21,6 +21,7 @@ import DocsContainer from "../containers/DocsContainer";
 import ComingSoonComponent from "./ComingSoonComponent";
 import BinderComponent from './BinderComponent';
 import FormByIdContainer from "../containers/FormByIdContainer";
+import CalendarContainer from "../containers/CalendarContainer";
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -29,7 +30,10 @@ export const ROUTE_CONTACTS = '/contacts';
 export const ROUTE_CALENDAR = '/calendar';
 export const ROUTE_FAVORITES = '/favorites';
 
-export const ROUTE_FORM_CREATE = `${ROUTE_FORMS}/create`;
+export const ROUTE_FORM_FROM_TEMPLATE = `/newFromTemplate`;
+
+export const ROUTE_VIEW_FORM = `/form/:id`;
+export const ROUTE_FORM_EDIT = `${ROUTE_VIEW_FORM}/edit`;
 
 const drawerWidth = 240;
 
@@ -198,9 +202,11 @@ class AppComponent extends React.Component {
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
                                 <Route path={ROUTE_CONTACTS} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
-                                <Route path={`${ROUTE_FORM_CREATE}/:id`} component={FormByIdContainer}/>
+                                <Route path={ROUTE_FORM_EDIT} component={FormByIdContainer}/>
+                                <Route path={`${ROUTE_FORM_FROM_TEMPLATE}/:id`} component={FormByIdContainer}/>
+                                <Route path={ROUTE_VIEW_FORM} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_FORMS} component={BinderComponent}/>
-                                <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
+                                <Route path={ROUTE_CALENDAR} component={CalendarContainer}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
                                 <Redirect to={ROUTE_HOME}/>
                             </Switch>

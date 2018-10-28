@@ -11,7 +11,7 @@ import Message from '@material-ui/icons/Message';
 import Fax from '@material-ui/icons/LocalPrintshop';
 import Email from '@material-ui/icons/Email';
 import AddPerson from '@material-ui/icons/PersonAdd';
-import {ROUTE_FORM_CREATE} from "./AppComponent";
+import {ROUTE_FORM_FROM_TEMPLATE} from "./AppComponent";
 import history from "../utils/history"
 import Card from "@material-ui/core/es/Card/Card";
 
@@ -122,7 +122,7 @@ class HomeComponent extends Component {
                     {isEditingTeam &&
                     <div className="team-member-profile-thumbnail">
                         <button className="btn-floating waves-effect waves-light profile-image-circle-mini"
-                                onClick={() => history.push(`${ROUTE_FORM_CREATE}/0`)}>
+                                onClick={() => history.push(`${ROUTE_FORM_FROM_TEMPLATE}/0`)}>
                             <AddPerson style={{fontSize: "100px"}}/>
                         </button>
                         <h4>Add To Team</h4>
