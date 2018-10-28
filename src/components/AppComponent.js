@@ -1,8 +1,8 @@
 import React from 'react';
+import {Router, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Redirect, Route, Router, Switch} from 'react-router-dom'
-import history from '../utils/history';
-import HomeContainer from '../containers/HomeContainer';
+import {withTheme} from '@material-ui/core/styles'
+import {compose} from 'recompose';
 
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
@@ -16,13 +16,19 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {getSideMenuNavItems} from '../SideMenuNavItems';
+import SideMenuNavItems from '../SideMenuNavItems';
+
+import history from "../utils/history";
+import ContactsContainer from "../containers/ContactsContainer";
 import DocsContainer from "../containers/DocsContainer";
 import ComingSoonComponent from "./ComingSoonComponent";
-import BinderComponent from './BinderComponent';
+import HomeContainer from '../containers/HomeContainer';
+
+// import BinderComponent from './BinderComponent';
 import FormByIdContainer from "../containers/FormByIdContainer";
 import CalendarContainer from "../containers/CalendarContainer";
 import ContactsContainer from "../containers/ContactsContainer";
+import FormsContainer from '../containers/FormsContainer';
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -157,10 +163,11 @@ class AppComponent extends React.Component {
     };
 
     render() {
+        console.log("Rendering App Component with props: ", this.props);
         const {classes, theme} = this.props;
 
         return (
-            <div className={classes.root} style={{width: "100vw"}}>
+            <div id="root" className={classes.root} style={{width: "100vw"}}>
                 <AppBar
                     position="absolute"
                     className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
@@ -193,7 +200,7 @@ class AppComponent extends React.Component {
                         </IconButton>
                     </div>
                     <Divider/>
-                    <List>{getSideMenuNavItems()}</List>
+                    <SideMenuNavItems />
                 </Drawer>
                 <main className={classes.content} style={{width: "100%"}}>
                     <div className={classes.toolbar}/>
@@ -206,7 +213,7 @@ class AppComponent extends React.Component {
                                 <Route path={ROUTE_FORM_EDIT} component={FormByIdContainer}/>
                                 <Route path={`${ROUTE_FORM_FROM_TEMPLATE}/:id`} component={FormByIdContainer}/>
                                 <Route path={ROUTE_VIEW_FORM} component={ComingSoonComponent}/>
-                                <Route path={ROUTE_FORMS} component={BinderComponent}/>
+                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
                                 <Route path={ROUTE_CALENDAR} component={CalendarContainer}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
                                 <Redirect to={ROUTE_HOME}/>
@@ -224,4 +231,4 @@ AppComponent.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, {withTheme: true})(AppComponent);
+export default  compose(withTheme(), withStyles(styles))(AppComponent);
