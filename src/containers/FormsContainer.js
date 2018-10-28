@@ -1,7 +1,8 @@
 import {connect}        from 'react-redux';
 import FormsComponent from "../components/FormsComponent";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps,
     forms: state.Forms
 });
 

@@ -3,7 +3,8 @@ import FormCardComponent from "../components/FormCardComponent";
 import {SHOW_FORM_MODAL} from "../reducers/IsFormModalShowing";
 import {LOAD_FORM_INTO_VIEW} from "../reducers/Forms";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+    ...ownProps
 });
 const mapDispatchToProps = (dispatch) => ({
     showFormModal: (form) => {

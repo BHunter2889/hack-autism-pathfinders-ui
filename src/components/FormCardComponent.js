@@ -4,6 +4,7 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions }
 class FormCardComponent extends Component {
     constructor(props) {
         super(props);
+        console.log("Form Card Under Construction... ")
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -13,6 +14,7 @@ class FormCardComponent extends Component {
     }
 
     render() {
+        console.log("Rendering Form Card for: ", this.props.form)
         const {form} = this.props;
 
         const btnImg = form.imgUrl || "fa-icon";

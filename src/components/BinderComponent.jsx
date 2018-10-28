@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles.js';
 import { Paper } from '@material-ui/core/es';
 import zIndex from '@material-ui/core/styles/zIndex';
+import FormsContainer from '../containers/FormsContainer';
 
 
 class BinderComponent extends React.Component {
@@ -54,14 +55,14 @@ class BinderComponent extends React.Component {
           onChange={this.handleChange}
           fullWidth={true}
         >
-          <HomeBoardTab label='Home' />
+          <HomeBoardTab label='Personal & Home' />
           <MedBoardTab label='Medical' />
-          <TeamBoardTab label='Support Team' />
+          <PublicBoardTab label='Public & Social ' />
         </Tabs>
 
-        { activeIndex === 0 && <TabContainer backgroundColor={backgroundColor}>Item One</TabContainer> }
-        { activeIndex === 1 && <TabContainer backgroundColor={backgroundColor}>Item Two</TabContainer> }
-        { activeIndex === 2 && <TabContainer backgroundColor={backgroundColor}>Item Three</TabContainer> }
+        { activeIndex === 0 && <TabContainer categoryIdx={"cat1"} backgroundColor={backgroundColor}></TabContainer> }
+        { activeIndex === 1 && <TabContainer categoryIdx={"cat2"} backgroundColor={backgroundColor}></TabContainer> }
+        { activeIndex === 2 && <TabContainer categoryIdx={"cat3"} backgroundColor={backgroundColor}></TabContainer> }
         </div>
     )
   }
@@ -110,7 +111,7 @@ const MedBoardTab = withStyles( theme => ({
     }
 }))(Tab);
 
-const TeamBoardTab = withStyles( theme => ({
+const PublicBoardTab = withStyles( theme => ({
     root:{
         fontSize: "2.4rem",
         fontWeight: "500",
@@ -129,12 +130,11 @@ const TeamBoardTab = withStyles( theme => ({
 
 function TabContainer(props) {
     const backgroundColor = props.backgroundColor;
+    const categoryIdx = props.categoryIdx;
   return (
     <div style={{display: "flex", height: "100%", flexFlow:"column"}}>
     <Paper style={{borderRadius: "0 0 5px 5px", flex: "1 1 auto", height: "calc(100vh - 114px)", backgroundColor, boxShadow:'0px -1px 5px rgba(0, 0, 0, 0.2), 0px 2px 4px -1px rgba(0, 0, 0, 0.2),0px 4px 5px 0px rgba(0, 0, 0, 0.14),0px 1px 10px 0px rgba(0, 0, 0, 0.12)'}}>
-        <Typography component="div" >
-            {props.children}
-        </Typography>
+        <FormsContainer categoryIdx={categoryIdx} />
     </Paper>
     </div>
   );

@@ -192,7 +192,7 @@ class AppComponent extends React.Component {
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
                                 <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
-                                <Route path={ROUTE_FORMS} component={BinderComponent}/>
+                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
                                 <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
                                 <Redirect to={ROUTE_HOME}/>
