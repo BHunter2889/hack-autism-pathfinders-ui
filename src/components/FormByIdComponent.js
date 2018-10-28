@@ -46,7 +46,7 @@ class FormByIdComponent extends Component {
                                 Submit
                             </Button>
                         </div>
-                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh"}} srcdoc={form.blankHtml} />
+                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh", backgroundColor: "white"}} srcdoc={form.blankHtml} />
                     </div>
                 }
                 <h3>This is not the form you're looking for...</h3>

@@ -199,7 +199,6 @@ class AppComponent extends React.Component {
                     open={this.state.open}
                 >
                     <div className={classes.toolbar}>
-                        Logo could go here?
                         <IconButton onClick={this.handleDrawerClose}>
                             {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                         </IconButton>

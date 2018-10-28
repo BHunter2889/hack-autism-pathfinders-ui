@@ -74,7 +74,7 @@ class ViewFormByIdComponent extends Component {
                             }}> Print Form </Button>
                             <Button style={{fontSize: "1.2em"}} onClick={()=> history.push(`${ROUTE_FORM_EDIT}/${id}`)}> Edit </Button>
                         </div>
-                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh"}} srcdoc={form.printableHtml} />
+                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh", backgroundColor: "white"}} srcdoc={form.printableHtml} />
                     </div>
                 }
                 <h3>This is not the form you're looking for...</h3>

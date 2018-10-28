@@ -19,7 +19,7 @@ class CalendarComponent extends Component {
         }) : [];
 
         return (
-            <div style={{height: "90vh"}}>
+            <div style={{height: "90vh", backgroundColor: "white"}}>
                 <BigCalendar
                     events={[]}
                     views={allViews}

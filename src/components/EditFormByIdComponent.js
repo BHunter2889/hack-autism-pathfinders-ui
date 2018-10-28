@@ -96,7 +96,7 @@ class EditFormByIdComponent extends Component {
                                 Save
                             </Button>
                         </div>
-                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh"}} srcdoc={form.editableHtml} />
+                        <iframe id={iframeId} name={iframeId} style={{width: "100%", height: "85vh", backgroundColor: "white"}} srcdoc={form.editableHtml} />
                     </div>
                 }
                 <h3>This is not the form you're looking for... EDIT</h3>
