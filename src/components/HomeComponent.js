@@ -11,8 +11,9 @@ import Message from '@material-ui/icons/Message';
 import Fax from '@material-ui/icons/LocalPrintshop';
 import Email from '@material-ui/icons/Email';
 import AddPerson from '@material-ui/icons/PersonAdd';
-import {ROUTE_FORMS} from "./AppComponent";
+import {ROUTE_FORM_CREATE} from "./AppComponent";
 import history from "../utils/history"
+import Card from "@material-ui/core/es/Card/Card";
 
 const team = [
     {
@@ -43,19 +44,61 @@ const team = [
     }
 ];
 
+function formatDate(dateTime) {
+    const monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
+
+    const date = new Date(dateTime);
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+
+const getUpcomingEvents = (eventItems) => {
+    const upcomingEvents = [];
+    if (eventItems && eventItems.length > 0) {
+        const MAX_EVENTS = 10;
+        for (let i = 0; i < MAX_EVENTS; i++) {
+            upcomingEvents.push(eventItems[i]);
+        }
+    }
+    return upcomingEvents;
+};
+
 class HomeComponent extends Component {
     constructor(props) {
         super(props);
+        console.log("items:", props.events);
         this.state = {
-            isEditingTeam: false
+            isEditingTeam: false,
+            upcomingEvents: props.events ? getUpcomingEvents(props.events.items) : []
         };
     }
 
+    updateUpcomingEvents() {
+        const {events} = this.props;
+        this.setState({upcomingEvents: events ? getUpcomingEvents(events.items) : []});
+    };
+
+    componentDidUpdate(prevProps) {
+        const {events} = this.props;
+        const {events: prevEvents} = prevProps;
+        if (prevEvents !== events) {
+            this.updateUpcomingEvents();
+        }
+    }
+
+
     render() {
 
-        const {upcomingEvents, show, onClose, member, screenHeight} = this.props;
-        const {isEditingTeam} = this.state;
-
+        const {show, onClose, member, screenHeight} = this.props;
+        const {isEditingTeam, upcomingEvents} = this.state;
         return (
             <div>
                 <h1> My Team</h1>
@@ -79,7 +122,7 @@ class HomeComponent extends Component {
                     {isEditingTeam &&
                     <div className="team-member-profile-thumbnail">
                         <button className="btn-floating waves-effect waves-light profile-image-circle-mini"
-                                onClick={() => history.push(ROUTE_FORMS)}>
+                                onClick={() => history.push(`${ROUTE_FORM_CREATE}/0`)}>
                             <AddPerson style={{fontSize: "100px"}}/>
                         </button>
                         <h4>Add To Team</h4>
@@ -96,8 +139,15 @@ class HomeComponent extends Component {
                                     <div> Loading Upcoming Events...</div>
                                 </div>
                                 :
-                                <div>
-                                    Event goes here
+                                <div className="events-container row">
+                                    {upcomingEvents.map((event) => <Card  className="calendar-card">
+                                        <h4>{event.summary}</h4>
+                                        <h5>When: {formatDate(event.start.dateTime)}</h5>
+                                        <h5>Where: {event.location}</h5>
+                                        <Divider inset/>
+                                        <div>{event.description}</div>
+
+                                    </Card>)}
                                 </div>
                             }
                         </div>
