@@ -1,5 +1,8 @@
 import React from 'react';
+import {Router, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {withTheme} from '@material-ui/core/styles'
+import {compose} from 'recompose';
 
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
@@ -13,8 +16,15 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {getSideMenuNavItems} from '../SideMenuNavItems';
-// import BinderComponent from './BinderComponent';
+import SideMenuNavItems from '../SideMenuNavItems';
+
+import history from "../utils/history";
+import ContactsContainer from "../containers/ContactsContainer";
+import DocsContainer from "../containers/DocsContainer";
+import FormsContainer from "../containers/FormsContainer";
+import ComingSoonComponent from "./ComingSoonComponent";
+import HomeContainer from '../containers/HomeContainer';
+
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -142,11 +152,11 @@ class AppComponent extends React.Component {
     };
 
     render() {
+        console.log("Rendering App Component with props: ", this.props);
         const {classes, theme} = this.props;
 
         return (
-            <div className={classes.root}>
-                <div className={"app-menus"}>
+            <div id="root" className={classes.root}>
                 <AppBar
                     position="absolute"
                     className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
@@ -179,15 +189,24 @@ class AppComponent extends React.Component {
                         </IconButton>
                     </div>
                     <Divider/>
-                    <List>{getSideMenuNavItems()}</List>
+                    <SideMenuNavItems />
                     {/*<Divider/>*/}
                     {/*<List>{otherMailFolderListItems}</List>*/}
                 </Drawer>
-                </div>
                 <main className={classes.content}>
                     <div className={classes.toolbar}/>
                     <div className="app-body">
-                        
+                        <Router history={history}>
+                            <Switch>
+                                <Route path={ROUTE_HOME} component={HomeContainer}/> */}
+                                <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
+                                <Route path={ROUTE_DOCS} component={DocsContainer}/>
+                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
+                                <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
+                                <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
+                                <Redirect to={ROUTE_HOME}/>
+                            </Switch>
+                        </Router>
                     </div>
                 </main>
             </div>
@@ -200,4 +219,4 @@ AppComponent.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, {withTheme: true})(AppComponent);
+export default  compose(withTheme(), withStyles(styles))(AppComponent);

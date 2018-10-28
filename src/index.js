@@ -7,18 +7,14 @@ import {composeWithDevTools}            from 'redux-devtools-extension/developme
 import {applyMiddleware, createStore}   from 'redux';
 import thunk                            from 'redux-thunk';
 import reducers                         from './reducers';
-import MuiThemeProvider                 from '@material-ui/core/styles';
+import {MuiThemeProvider}                 from '@material-ui/core/styles';
 import theme                            from './themes/LifeBinderTheme';
 
 const store = createStore(reducers(), composeWithDevTools(applyMiddleware(thunk)));
 
-function App() {
-    return (
-        <MuiThemeProvider theme={theme}>
-    <RootComponent store={store} />
-</MuiThemeProvider>
-    );
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render((
+<MuiThemeProvider theme={theme}>
+                    <RootComponent store={store} />
+</MuiThemeProvider>), 
+                document.getElementById('root'));
 registerServiceWorker();
