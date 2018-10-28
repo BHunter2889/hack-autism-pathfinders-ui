@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormCardContainer from '../containers/FormCardContainer';
 import { Typography } from '@material-ui/core';
+import theme from '../themes/LifeBinderTheme';
 
 class FormsComponent extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class FormsComponent extends Component {
     console.log("Forms: ", forms)
     console.log("Category: ", this.props.categoryIdx)
     return (
-      <div className="form-card-container">
+      <div className="form-card-container" >
         {forms.length > 0
           ? forms.map(form => 
           <FormCardContainer form={form} />
