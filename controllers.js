@@ -1,4 +1,8 @@
 const fs=require('fs')
+const {downloadFromDrive,uploadToDrive}=require('./driveUploader')
+const {convert,switchKeys}=require('./convertSqliteResult')
+const crypto=require('./crypto')
+const {pool,query}=require('./query')
 //getDocs
 async function getDocs(req,res) {
   res.json([
@@ -15,18 +19,41 @@ async function getPrintableDocs(req,res) {
 }
 //getForms
 async function getForms(req,res) {
-  res.json([
-    {id:1234,title:"title4",category:"cat3"},
-    {id:1234,title:"title3",category:"cat3"},
-    {id:1234,title:"title2",category:"cat2"},
-    {id:1234,title:"title1",category:"cat1"}
-  ])
+  if(req.user) {
+  console.log('1')
+      const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
+  console.log('2',sqliteDb)
+      const result=sqliteDb.exec(`SELECT * FROM form`)
+  console.log('3',result)
+      const rows=convert(result)
+  console.log('4')
+      const ready=switchKeys({id:'id',form_template_id:'formTemplateId',data:'data'},rows)
+  console.log('5')
+      res.json(rows)
+    }  else {
+//      res.send('you are NOT logged in')
+        res.json([
+            {id:1234,title:"title4",category:"cat3",data:{'foo':'bar'}},
+            {id:1234,title:"title3",category:"cat3",data:{'foo':'bar'}},
+            {id:1234,title:"title2",category:"cat2",data:{'foo':'bar'}},
+            {id:1234,title:"title1",category:"cat1",data:{'foo':'bar'}}
+          ])
+    }
 }
 //getForm
 async function getForm(req,res) {
-  res.json({
-    title:'title1',category:'category 1',data:{foo:'bar',baz:'buzz'},createdOn:new Date(),updatedOn:new Date(),templateId:1
-  })
+  if(req.user) {
+    const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
+    const result=sqliteDb.exec(`SELECT * FROM form where id=${req.params.id}`)
+    const rows=convert(result)
+    const ready=switchKeys({id:'id',form_template_id:'formTemplateId',data:'data'},rows)
+    res.json(rows[0])
+  }  else {
+//      res.send('you are NOT logged in')
+      res.json({
+          title:'title1',category:'category 1',data:{foo:'bar',baz:'buzz'},createdOn:new Date(),updatedOn:new Date(),templateId:1
+        })
+  }
 }
 //getEvents
 async function getEvents(req,res) {
@@ -90,7 +117,32 @@ async function addDoc(req,res) {
 }
 //addForm
 async function addForm(req,res) {
-  res.status(201).end();
+  try {
+  if(req.user) {
+      const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
+      //todo validate json with tv4 and formSchemas/supportTeamMember.json
+      const inserted=sqliteDb.exec(`INSERT INTO form (form_template_id,data) VALUES (${req.body.formTemplateId || 7},'${JSON.stringify(req.body.data)}'); SELECT last_insert_rowid();`)
+      console.log('inserted is ',inserted[0].values[0][0])
+      const uploadResponse= await uploadToDrive(
+          crypto.encrypt(new Buffer(sqliteDb.export())),
+          'db.encrypted',//todo save this as auto-incrementing name so users know which is the latest (computer already knows from file id)
+          req.user.pathbinder_folder_id,
+          req.user.token);
+          //update the user with the newly saved sqlite db
+      await query({text:`UPDATE ${process.env.DBSCHEMA}.user SET sqlite_file_id=$1`,values:[uploadResponse.data.id]})
+      console.log('uploaded id is ',uploadResponse.data.id)
+      const result=sqliteDb.exec(`SELECT * FROM form where id=${inserted[0].values[0][0]}`)
+      console.log('sqlite select is ',result)
+      const rows=convert(result)
+      const ready=switchKeys({id:'id',form_template_id:'formTemplateId',data:'data'},rows)
+      res.status(201).json(rows[0])
+    }  else {
+  //      res.send('you are NOT logged in')
+        res.status(201).json({
+            title:'title1',category:'category 1',data:{foo:'bar',baz:'buzz'},createdOn:new Date(),updatedOn:new Date(),templateId:1
+          })
+    }
+    }catch(e) { console.log(e); res.json(e)}
 }
 
 module.exports = {
