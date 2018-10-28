@@ -4,11 +4,22 @@ const app = express()
 const bodyParser=require('body-parser')
 const compression = require('compression')
 const {pool,query}=require('./query')
-// const driveCaller=require('./driveCaller')
+const driveCaller=require('./driveCaller')
 const fs=require('fs')
 const path    = require("path");
 const session=require('express-session')
 const pgSession = require('connect-pg-simple')(session)
+const { getDocs,
+         getPrintableDocs,
+         getForms,
+         getForm,
+         getEvents,
+         getTeam,
+         getContacts,
+         getUser,
+         addCalEvent,
+         addDoc,
+         addForm } = require('./controllers')
 
 //just in case
 process.on('unhandledRejection', function(e) {
@@ -39,23 +50,54 @@ app.get('/auth/google',(req, res, next) => {
     }
     next();
   },
-  passport.authenticate('google', { scope: ['email', 'profile','https://www.googleapis.com/auth/drive.file'] }))
+  passport.authenticate('google', { scope: [
+  'email',
+  'profile',
+  'https://www.googleapis.com/auth/drive',
+  'https://www.googleapis.com/auth/calendar.events',
+  'https://www.googleapis.com/auth/calendar',
+  'https://www.googleapis.com/auth/contacts.readonly'
+  ] }))
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
   // Redirect back to the original page, if any
   (req, res) => {
     const redirect = req.session.oauth2return || '/';
     delete req.session.oauth2return;
     res.redirect(redirect);
   })
-  app.get('/status',(req,res)=>{
-    if(req.user) {
-      res.send('you are logged in')
-    }  else {
-      res.send('you are NOT logged in')
-    }
-  })
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/status',async (req,res)=>{
+  if(req.user) {
+  const folderId='0B_lgC0Va_yKOTURGNFdCdzV5UlU'
+  console.log(folderId)
+  console.log(req.user.token)
+    const folderName= await driveCaller.getFolderName(folderId,req.user.token)
+    req.user.folderName=folderName
+    res.json(req.user)
+  }  else {
+    res.send('you are NOT logged in')
+  }
+})
+
+app.get('/api/docs',getDocs)
+app.get('/api/printableDocs',getPrintableDocs)
+app.get('/api/forms',getForms)
+app.get('/api/form',getForm)
+app.get('/api/events',getEvents)
+app.get('/api/team',getTeam)
+app.get('/api/contacts',getContacts)
+app.get('/api/user',getUser)
+app.post('/api/addCalEvent',addCalEvent)
+app.post('/api/addDoc',addDoc)
+app.post('/api/addForm',addForm)
+
   app.use('/',express.static('build'))
   app.use('/public',express.static('public'))
 
