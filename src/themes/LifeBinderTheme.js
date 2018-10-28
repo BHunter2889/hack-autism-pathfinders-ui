@@ -14,6 +14,15 @@
 //             // dark: will be calculated from palette.secondary.main,
 //             contrastText: '#ffcc00',
 //         },
+//         home-board-color: {
+    //         main: (SET BOARD/FORM COLOR HERE)
+        // },
+        // medical-board-color: {
+            //         main: (SET BOARD/FORM COLOR HERE)
+        // },
+        // team-board-color: {
+            //         main: (SET BOARD/FORM COLOR HERE)
+        // },
 //         // error: will use the default color
 //     },
 // });

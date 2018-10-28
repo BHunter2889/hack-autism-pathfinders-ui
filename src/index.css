@@ -19,26 +19,29 @@ code {
 
 .app-body {
     text-align: center;
+    overflow: auto;
 }
 
 .team-dashboard-container {
     padding-top: 20px;
     height: calc(100vh - 350px);
+    min-height: 400px;
 }
 
 .upcoming-events-container {
     padding-top: 20px;
     height: 345px;
-    overflow: hidden;
 }
 
 .team-member-profile-thumbnail {
-    float: left;
+    display: inline-block;
+    margin-right: 30px;
 }
 
 .profile-image-circle-mini {
     display: inline-block;
     margin-right: 10px;
+    padding: 0;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -48,9 +51,21 @@ code {
     background-position: center center;
     background-size: cover;
     overflow: hidden;
+}
 
+.add-profile-circle svg {
+    font-size: 115px;
+    margin-top: 18px;
+    margin-left: -15px;
 }
 
 .profile-image-circle-mini img {
     width: 100%;
+}
+
+.modal-container {
+    position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+    position: absolute;
 }

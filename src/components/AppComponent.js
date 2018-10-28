@@ -21,6 +21,7 @@ import ContactsContainer from "../containers/ContactsContainer";
 import DocsContainer from "../containers/DocsContainer";
 import FormsContainer from "../containers/FormsContainer";
 import ComingSoonComponent from "./ComingSoonComponent";
+import BinderComponent from './BinderComponent';
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -94,25 +95,45 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
         // padding: theme.spacing.unit * 3,
     },
+    homeBoard: {
+        backgroundColor: "deepskyblue"
+    },
+    medBoard: {
+        backgroundColor: "orange"
+    },
+    teamBoard: {
+        backgroundColor: "blueviolet"
+    }
 });
 
-class RootComponent extends React.Component {
+class AppComponent extends React.Component {
     constructor(props) {
         super(props);
         // TODO - uncomment these when we hook up the api calls
-        // props.fetchDocs();
-        // props.fetchForms();
-        // props.fetchTeam();
-        // props.fetchContacts();
-        // Basic Fetch Test:
-        // console.log("Trying to hit stuff");
-        // fetch('/stuff')
-        //     .then((res) => {
-        //         console.log("the response:", res);
-        //     })
-        //     .catch((err) => {
-        //         console.log("ohh no! error:", err);
-        //     })
+        props.fetchDocs();
+        props.fetchForms();
+        props.fetchTeam();
+        props.fetchContacts();
+        props.fetchUpcomingEvents();
+
+        this.updateDimensions = this.updateDimensions.bind(this);
+        this.lastHeight = this.height = window.innerHeight;
+        this.updateDimensions();
+    }
+
+    updateDimensions() {
+        const {updateDimensions} = this.props;
+        this.height = window.innerHeight;
+        if ((this.lastHeight > 800 && this.height < 800) ||
+            (this.lastHeight < 800 && this.height > 800)) {
+            updateDimensions({width: window.innerWidth, height: window.innerHeight});
+        }
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
     }
 
     state = {
@@ -176,7 +197,7 @@ class RootComponent extends React.Component {
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
                                 <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
-                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
+                                <Route path={ROUTE_FORMS} component={BinderComponent}/>
                                 <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
                                 <Redirect to={ROUTE_HOME}/>
@@ -189,9 +210,9 @@ class RootComponent extends React.Component {
     }
 }
 
-RootComponent.propTypes = {
+AppComponent.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, {withTheme: true})(RootComponent);
+export default withStyles(styles, {withTheme: true})(AppComponent);
