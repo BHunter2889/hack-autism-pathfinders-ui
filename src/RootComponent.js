@@ -1,8 +1,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {Router} from 'react-router-dom'
-import history from './utils/history';
+import {BrowserRouter as Router} from 'react-router-dom'
+// import history from './utils/history';
 import AppContainer from './containers/AppContainer';
+// import { MuiThemeProvider } from '@material-ui/core';
+// import theme from './themes/LifeBinderTheme';
 
 class RootComponent extends React.Component {
     render() {
@@ -10,9 +12,11 @@ class RootComponent extends React.Component {
 
         return (
             <Provider store={store}>
-                <Router history={history}>
-                    <AppContainer />
-                </Router>
+                {/* <MuiThemeProvider theme={theme} > */}
+                    <Router>
+                        <AppContainer />
+                    </Router>
+                {/* </MuiThemeProvider>                 */}
             </Provider>
         );
     }

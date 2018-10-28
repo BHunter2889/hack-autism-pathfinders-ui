@@ -21,13 +21,16 @@ class FormCardComponent extends Component {
 
         return (
             <Card  className="form-card">
-                <CardActionArea onClick={this.handleClick}>
+                <div>
+                <CardActionArea  onClick={this.handleClick}>
+                    <div>
                     <CardMedia 
                         className="form-card-img"
                         image={btnImg}
                         title={form.title}
                     />
                     <CardContent>
+                        <div>
                         <Typography gutterBottom variant="h5" component="h2">
                             {form.title}
                         </Typography>
@@ -35,16 +38,21 @@ class FormCardComponent extends Component {
                             This Form helps you keep track of... 
                             Whatever it's supposed to help you keep track of!
                         </Typography>
+                        </div>
                     </CardContent>
+                    </div>
                 </CardActionArea>
                 <CardActions>
+                    <div>
                     <Button size="small" color="primary">
                         Print
                     </Button>
                     <Button size="small" color="primary">
                         Save PDF
                     </Button>
+                    </div>
                 </CardActions>
+                </div>
             </Card>
         );
     }

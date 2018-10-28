@@ -15,6 +15,7 @@
     "express-session": "^1.15.6",
     "googleapis": "^34.0.0",
     "immutable": "^3.8.2",
+    "material-ui": "^0.20.2",
     "muicss": "^0.9.39",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",

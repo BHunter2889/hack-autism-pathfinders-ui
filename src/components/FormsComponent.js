@@ -24,7 +24,6 @@ class FormsComponent extends Component {
       <div>
         {forms.length > 0
           ? forms.map(form => 
-          // (form.category === this.props.categoryIdx) && 
           <FormCardContainer form={form} />
           )
           : <Typography gutterBottom variant="h5" component="h2"> No Forms Available Yet </Typography>

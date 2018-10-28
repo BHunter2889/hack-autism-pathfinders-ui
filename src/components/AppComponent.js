@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Redirect, Route, Router, Switch} from 'react-router-dom'
-import history from '../utils/history';
-import HomeContainer from '../containers/HomeContainer';
 
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
@@ -17,11 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {getSideMenuNavItems} from '../SideMenuNavItems';
-import ContactsContainer from "../containers/ContactsContainer";
-import DocsContainer from "../containers/DocsContainer";
-import FormsContainer from "../containers/FormsContainer";
-import ComingSoonComponent from "./ComingSoonComponent";
-import BinderComponent from './BinderComponent';
+// import BinderComponent from './BinderComponent';
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -153,6 +146,7 @@ class AppComponent extends React.Component {
 
         return (
             <div className={classes.root}>
+                <div className={"app-menus"}>
                 <AppBar
                     position="absolute"
                     className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
@@ -189,20 +183,11 @@ class AppComponent extends React.Component {
                     {/*<Divider/>*/}
                     {/*<List>{otherMailFolderListItems}</List>*/}
                 </Drawer>
+                </div>
                 <main className={classes.content}>
                     <div className={classes.toolbar}/>
                     <div className="app-body">
-                        <Router history={history}>
-                            <Switch>
-                                <Route path={ROUTE_HOME} component={HomeContainer}/>
-                                <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
-                                <Route path={ROUTE_DOCS} component={DocsContainer}/>
-                                <Route path={ROUTE_FORMS} component={FormsContainer}/>
-                                <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
-                                <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
-                                <Redirect to={ROUTE_HOME}/>
-                            </Switch>
-                        </Router>
+                        
                     </div>
                 </main>
             </div>
