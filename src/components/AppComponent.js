@@ -27,7 +27,6 @@ import HomeContainer from '../containers/HomeContainer';
 // import BinderComponent from './BinderComponent';
 import FormByIdContainer from "../containers/FormByIdContainer";
 import CalendarContainer from "../containers/CalendarContainer";
-import ContactsContainer from "../containers/ContactsContainer";
 import FormsContainer from '../containers/FormsContainer';
 
 export const ROUTE_HOME = '/home';
