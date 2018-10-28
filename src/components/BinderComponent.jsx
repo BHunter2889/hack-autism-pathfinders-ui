@@ -81,11 +81,11 @@ const HomeBoardTab = withStyles( theme => ({
         borderTopLeftRadius: "5px",
         borderTopRightRadius: "5px",
         backgroundColor: "deepskyblue",
-        fontSize: "1.5rem",
+        fontSize: "2.4rem",
         fontWeight: "500"
     },
     selected: {
-        fontSize: "1.5rem",
+        fontSize: "2.5rem",
         fontWeight: "600",
         color: 'tomato',
         borderBottom: '3px solid tomato',
@@ -95,13 +95,14 @@ const HomeBoardTab = withStyles( theme => ({
 
 const MedBoardTab = withStyles( theme => ({
     root:{
-        fontSize: "1.5rem",
+        fontSize: "2.4rem",
         fontWeight: "500",
         borderTopLeftRadius: "5px",
         borderTopRightRadius: "5px",
         backgroundColor: "orange",
     },
     selected: {
+        fontSize: "2.5rem",        
         fontWeight: "600",
         color: 'tomato',
         borderBottom: '3px solid tomato',
@@ -111,13 +112,14 @@ const MedBoardTab = withStyles( theme => ({
 
 const TeamBoardTab = withStyles( theme => ({
     root:{
-        fontSize: "1.5rem",
+        fontSize: "2.4rem",
         fontWeight: "500",
         borderTopLeftRadius: "5px",
         borderTopRightRadius: "5px",
         backgroundColor: "blueviolet"
     },
     selected: {
+        fontSize: "2.5rem",        
         fontWeight: "600",
         color: 'tomato',
         borderBottom: '3px solid tomato',
