@@ -8,6 +8,8 @@ const db = new sql.Database();
 
 // Execute some sql
 db.run(fs.readFileSync('./sqliteMigration/1_create_initial.sql','utf8')); // Run the query without returning anything
+//const rows = res.map(obj=>obj.columns.reduce((accum,col)=>{[col]:}))
+//console.log(rows)
 /*
 const insertDoc = db.prepare(`INSERT INTO Docs (title,category) VALUES (:title,:category)`)
 insertDoc.bind(['hello','category`'])
@@ -16,10 +18,16 @@ insertDoc.free();
 */
 
 //write to an encrypted file
-//var data = db.export();
-//fs.writeFileSync('myEncryptedDb.sqlite',crypto.encrypt(new Buffer(data)))
-//var fileBuffer = crypto.decrypt(fs.readFileSync('myEncryptedDb.sqlite'))
-//const newDb = new sql.Database(fileBuffer)
+var data = db.export();
+fs.writeFileSync('myEncryptedDb.sqlite',crypto.encrypt(new Buffer(data)))
+//const enc=fs.readFileSync('db.encrypted')
+const enc=fs.readFileSync('myEncryptedDb.sqlite')
+//console.log(enc)
+var fileBuffer = crypto.decrypt(enc)
+//console.log(fileBuffer)
+const newDb = new sql.Database(fileBuffer)
+const res=newDb.exec(`SELECT * FROM sqlite_master WHERE type='table'`)
+console.log(JSON.stringify(res,null,2))
 
 //var selectDocs = newDb.prepare("SELECT * FROM Docs WHERE id=:id");
 //
@@ -43,5 +51,5 @@ console.log('uploading...')
     })
 }
 
-upload();
-setTimeout(()=>{console.log('done'),2000})
+//upload();
+//setTimeout(()=>{console.log('done'),2000})

@@ -3,7 +3,6 @@ const util=require('util');
 
 
 function uploadToDrive(dataBuffer,filename,folderId,token,cb) {
-  console.log('hi')
   const form = new FormData()
   form.append('media',dataBuffer)
   form.submit({
@@ -99,7 +98,86 @@ async function makeFolder(folderName,token,parentFolderId) {
     }
 }
 
+const crypto = require('./crypto')
+const sql = require('sql.js');
+const fs= require('fs')
+
+async function downloadFromDrive(fileId,token) {
+console.log('id: ',fileId)
+console.log('token: ',token)
+console.log('url',`https://www.googleapis.com/drive/v3/files/${fileId}?acknowledgeAbuse=true`)
+//  const response = await axios.get(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+//          {},{
+//            headers:{
+//              Authorization:`Bearer ${token}`
+//            }
+//          }).catch(e=>{
+//            console.log(e)
+//            return Promise.resolve({data:'nothing'})
+//          })
+//          try {
+//              console.log('decrypting...',response)
+//              const fileBuffer=crypto.decrypt(response)
+//              console.log('databasing...',fileBuffer)
+//              const newDb = new sql.Database(fileBuffer)
+//              console.log('success!')
+//              return newDb
+//          } catch(err) {
+//           console.log(body)
+//           return Promise.reject(err)
+//          }
+//const res = await axios({
+//  method:'get',
+//  url:`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+//  headers:{Authorization:`Bearer ${token}`},
+//  responseType:'stream'
+//}).catch(e=>{
+//            console.log(e)
+//            return Promise.resolve({data:'nothing'})
+//          })
+//  console.log(res)
+//return new Promise((resolve,reject)=>{
+//  var body = '';
+//  res.data.on('data', function(chunk) {
+//      body += chunk;
+//    });
+//  res.data.on('end', function() {
+//    try {
+//    console.log('decrypting...',body)
+//    const fileBuffer=crypto.decrypt(body)
+//    console.log('databasing...',fileBuffer)
+//    const newDb = new sql.Database(fileBuffer)
+//    console.log('success!')
+//    resolve(newDb)
+//    } catch(err) {
+//             console.log(body)
+//             reject(err)
+//            }
+//  })
+//})
+
+const res = await axios({
+  method:'get',
+  responseType: 'arraybuffer',
+  url:`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+  headers:{Authorization:`Bearer ${token}`}
+}).catch(e=>{
+            console.log(e)
+            return Promise.resolve({data:'nothing'})
+          })
+//          console.log(res.data)
+//  console.log(res.data)
+//  fs.writeFileSync('myEncryptedDb.sqlite',crypto.encrypt(new Buffer(data)))
+//fs.writeFileSync('temp.json',res.data)
+console.log(res.data)
+  const fileBuffer=crypto.decrypt(res.data)
+  console.log(fileBuffer)
+  const newDb = new sql.Database(fileBuffer)
+  return newDb
+}
+
 module.exports = {
   uploadToDrive:util.promisify(uploadToDrive),
-  makeFolder
+  makeFolder,
+  downloadFromDrive
 }
