@@ -63,7 +63,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/google' }),
   // Redirect back to the original page, if any
   (req, res) => {
-    const redirect = req.session.oauth2return || '/status';
+    const redirect = req.session.oauth2return || '/';
     delete req.session.oauth2return;
     res.redirect(redirect);
   })
@@ -97,7 +97,7 @@ console.log(JSON.stringify(result,null,2))
 app.get('/api/docs',getDocs)
 app.get('/api/printableDocs',getPrintableDocs)
 app.get('/api/forms',getForms)
-app.get('/api/form',getForm)
+app.get('/api/form/:id',getForm)
 app.get('/api/events',getEvents)
 app.get('/api/team',getTeam)
 app.get('/api/contacts',getContacts)

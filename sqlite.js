@@ -1,6 +1,7 @@
 const sql = require('sql.js');
 const fs = require('fs')
 const crypto=require('./crypto')
+const {convert,switchKeys}=require('./convertSqliteResult')
 // Create a database
 const db = new sql.Database();
 // NOTE: You can also use new sql.Database(data) where
@@ -26,8 +27,12 @@ const enc=fs.readFileSync('myEncryptedDb.sqlite')
 var fileBuffer = crypto.decrypt(enc)
 //console.log(fileBuffer)
 const newDb = new sql.Database(fileBuffer)
-const res=newDb.exec(`SELECT * FROM sqlite_master WHERE type='table'`)
-console.log(JSON.stringify(res,null,2))
+const res=newDb.exec(`SELECT * FROM form_template`)
+
+const rows=convert(res)
+//const ready=switchKeys({id:'id',form_template_id:'formTemplateId',data:'data'},rows)
+const ready=switchKeys({category:'bogus',title:'nomme',id:'id'},rows)
+console.log(JSON.stringify(ready,null,2))
 
 //var selectDocs = newDb.prepare("SELECT * FROM Docs WHERE id=:id");
 //
