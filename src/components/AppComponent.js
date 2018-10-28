@@ -117,12 +117,17 @@ class AppComponent extends React.Component {
         props.fetchUpcomingEvents();
 
         this.updateDimensions = this.updateDimensions.bind(this);
+        this.lastHeight = this.height = window.innerHeight;
         this.updateDimensions();
     }
 
     updateDimensions() {
         const {updateDimensions} = this.props;
-        updateDimensions({width: window.innerWidth, height: window.innerHeight});
+        this.height = window.innerHeight;
+        if ((this.lastHeight > 800 && this.height < 800) ||
+            (this.lastHeight < 800 && this.height > 800)) {
+            updateDimensions({width: window.innerWidth, height: window.innerHeight});
+        }
     }
     componentDidMount() {
         window.addEventListener("resize", this.updateDimensions);

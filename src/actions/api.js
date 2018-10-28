@@ -10,8 +10,6 @@ const GET_TEAM_URL = "/api/team";
 const GET_CONTACTS_URL = "/api/contacts";
 const GET_UPCOMING_EVENTS_URL = "api/events";
 
-const getObjectFromStreamRes = (res) => JSON.parse(res.body.json());
-
 export const doGetContacts = (dispatch) => {
     fetch(GET_CONTACTS_URL)
         .then(res => res.json())
