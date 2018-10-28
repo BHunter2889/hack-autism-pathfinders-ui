@@ -98,8 +98,8 @@ app.post('/api/addCalEvent',addCalEvent)
 app.post('/api/addDoc',addDoc)
 app.post('/api/addForm',addForm)
 
-  app.use('/',express.static('build'))
-  app.use('/public',express.static('public'))
+app.use('/',express.static('build'))
+app.use('/public',express.static('public'))
 
   let server = app.listen(process.env.PORT || 3000, function () {
     console.log('App listening on port '+(process.env.PORT || 3000))
