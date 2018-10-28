@@ -1,5 +1,6 @@
 import {combineReducers}        from 'redux';
 import Forms                    from './Forms';
+import FormData                 from './FormData';
 import Contacts from "./Contacts";
 import Docs from "./Docs";
 import Team from "./Team";
@@ -14,6 +15,7 @@ export default () => combineReducers({
     Contacts,
     Docs,
     Forms,
+    FormData,
     IsMemberModalShowing,
     IsFormModalShowing,
     MemberModalDetails,

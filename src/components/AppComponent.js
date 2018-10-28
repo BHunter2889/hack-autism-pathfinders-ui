@@ -28,6 +28,8 @@ import HomeContainer from '../containers/HomeContainer';
 import FormByIdContainer from "../containers/FormByIdContainer";
 import CalendarContainer from "../containers/CalendarContainer";
 import FormsContainer from '../containers/FormsContainer';
+import ViewFormByIdContainer from "../containers/ViewFormByIdContainer";
+import EditFormByIdContainer from "../containers/EditFormByIdContainer";
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -38,8 +40,8 @@ export const ROUTE_FAVORITES = '/favorites';
 
 export const ROUTE_FORM_FROM_TEMPLATE = `/newFromTemplate`;
 
-export const ROUTE_VIEW_FORM = `/form/:id`;
-export const ROUTE_FORM_EDIT = `${ROUTE_VIEW_FORM}/edit`;
+export const ROUTE_VIEW_FORM = `/form`;
+export const ROUTE_FORM_EDIT = `/editForm`;
 
 const drawerWidth = 240;
 
@@ -209,9 +211,9 @@ class AppComponent extends React.Component {
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
                                 <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
-                                <Route path={ROUTE_FORM_EDIT} component={FormByIdContainer}/>
+                                <Route path={`${ROUTE_FORM_EDIT}/:id`} component={EditFormByIdContainer}/>
+                                <Route path={`${ROUTE_VIEW_FORM}/:id`} component={ViewFormByIdContainer}/>
                                 <Route path={`${ROUTE_FORM_FROM_TEMPLATE}/:id`} component={FormByIdContainer}/>
-                                <Route path={ROUTE_VIEW_FORM} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_FORMS} component={FormsContainer}/>
                                 <Route path={ROUTE_CALENDAR} component={CalendarContainer}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
