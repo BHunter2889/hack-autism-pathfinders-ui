@@ -95,6 +95,15 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.default,
         // padding: theme.spacing.unit * 3,
     },
+    homeBoard: {
+        backgroundColor: "deepskyblue"
+    },
+    medBoard: {
+        backgroundColor: "orange"
+    },
+    teamBoard: {
+        backgroundColor: "blueviolet"
+    }
 });
 
 class AppComponent extends React.Component {
