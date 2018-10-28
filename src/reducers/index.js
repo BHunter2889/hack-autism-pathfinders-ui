@@ -7,6 +7,7 @@ import UpcomingEvents from "./UpcomingEvents";
 import IsMemberModalShowing from "./IsMemberModalShowing";
 import IsFormModalShowing from "./IsFormModalShowing";
 import MemberModalDetails from "./MemberModalDetails";
+import ScreenDimensions from "./ScreenDimensions";
 
 
 export default () => combineReducers({
@@ -16,6 +17,7 @@ export default () => combineReducers({
     IsMemberModalShowing,
     IsFormModalShowing,
     MemberModalDetails,
+    ScreenDimensions,
     Team,
     UpcomingEvents
 });

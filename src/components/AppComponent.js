@@ -97,23 +97,29 @@ const styles = theme => ({
     },
 });
 
-class RootComponent extends React.Component {
+class AppComponent extends React.Component {
     constructor(props) {
         super(props);
         // TODO - uncomment these when we hook up the api calls
-        // props.fetchDocs();
-        // props.fetchForms();
-        // props.fetchTeam();
-        // props.fetchContacts();
-        // Basic Fetch Test:
-        // console.log("Trying to hit stuff");
-        // fetch('/stuff')
-        //     .then((res) => {
-        //         console.log("the response:", res);
-        //     })
-        //     .catch((err) => {
-        //         console.log("ohh no! error:", err);
-        //     })
+        props.fetchDocs();
+        props.fetchForms();
+        props.fetchTeam();
+        props.fetchContacts();
+        props.fetchUpcomingEvents();
+
+        this.updateDimensions = this.updateDimensions.bind(this);
+        this.updateDimensions();
+    }
+
+    updateDimensions() {
+        const {updateDimensions} = this.props;
+        updateDimensions({width: window.innerWidth, height: window.innerHeight});
+    }
+    componentDidMount() {
+        window.addEventListener("resize", this.updateDimensions);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions);
     }
 
     state = {
@@ -190,9 +196,9 @@ class RootComponent extends React.Component {
     }
 }
 
-RootComponent.propTypes = {
+AppComponent.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, {withTheme: true})(RootComponent);
+export default withStyles(styles, {withTheme: true})(AppComponent);

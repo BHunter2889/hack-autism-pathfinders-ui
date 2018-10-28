@@ -53,13 +53,14 @@ class HomeComponent extends Component {
 
     render() {
 
-        const {upcomingEvents, show, onClose, member} = this.props;
+        const {upcomingEvents, show, onClose, member, screenHeight} = this.props;
         const {isEditingTeam} = this.state;
 
         return (
             <div>
                 <h1> My Team</h1>
-                <button className="btn btn-link" style={{marginTop: "-10px"}} onClick={() => this.setState({isEditingTeam: !isEditingTeam})}>
+                <button className="btn btn-link" style={{marginTop: "-10px"}}
+                        onClick={() => this.setState({isEditingTeam: !isEditingTeam})}>
                     {isEditingTeam ? "(finish editing)" : "(edit team)"}
                 </button>
 
@@ -71,32 +72,37 @@ class HomeComponent extends Component {
                         </div>
                         :
                         <div style={{width: "100%"}}>
-                            {team.map((member) => <TeamMemberProfileContainer showRemoval={isEditingTeam} member={member}/>)}
+                            {team.map((member) => <TeamMemberProfileContainer showRemoval={isEditingTeam}
+                                                                              member={member}/>)}
                         </div>
                     }
                     {isEditingTeam &&
                     <div className="team-member-profile-thumbnail">
-                        <button className="btn-floating waves-effect waves-light profile-image-circle-mini" onClick={() => history.push(ROUTE_FORMS)}>
+                        <button className="btn-floating waves-effect waves-light profile-image-circle-mini"
+                                onClick={() => history.push(ROUTE_FORMS)}>
                             <AddPerson style={{fontSize: "100px"}}/>
                         </button>
                         <h4>Add To Team</h4>
                     </div>
                     }
                 </div>
-                <Divider/>
-                <div className="upcoming-events-container">
-                    {!upcomingEvents ?
-                        <div>
-                            <CircularProgress size={50}/>
-                            <div> Loading Upcoming Events...</div>
+                {screenHeight && screenHeight > 700 &&
+                    <div>
+                        <Divider/>
+                        <div className="upcoming-events-container">
+                            {!upcomingEvents ?
+                                <div>
+                                    <CircularProgress size={50}/>
+                                    <div> Loading Upcoming Events...</div>
+                                </div>
+                                :
+                                <div>
+                                    Event goes here
+                                </div>
+                            }
                         </div>
-                        :
-                        <div>
-                            Event goes here
-                        </div>
-                    }
-                </div>
-                {/*//TODO get modal working*/}
+                    </div>
+                }
                 <Modal
                     show={show}
                     onHide={onClose}
@@ -108,34 +114,39 @@ class HomeComponent extends Component {
                         <TeamMemberProfileContainer member={member}/>
                         <div style={{width: "100%"}}>
                             <Chip
-                                avatar={<Avatar><VideoCall /></Avatar>}
+                                avatar={<Avatar><VideoCall/></Avatar>}
                                 label="Video Call"
                                 style={{fontSize: 14}}
-                                onClick={() => {/*noop*/}}
+                                onClick={() => {/*noop*/
+                                }}
                             />&nbsp;&nbsp;
                             <Chip
-                                avatar={<Avatar><Phone /></Avatar>}
+                                avatar={<Avatar><Phone/></Avatar>}
                                 label={`Call`}
                                 style={{fontSize: 14}}
-                                onClick={() => {/*noop*/}}
+                                onClick={() => {/*noop*/
+                                }}
                             />&nbsp;&nbsp;
                             <Chip
-                                avatar={<Avatar><Message /></Avatar>}
+                                avatar={<Avatar><Message/></Avatar>}
                                 label="SMS"
                                 style={{fontSize: 14}}
-                                onClick={() => {/*noop*/}}
+                                onClick={() => {/*noop*/
+                                }}
                             />&nbsp;&nbsp;
                             <Chip
-                                avatar={<Avatar><Fax /></Avatar>}
+                                avatar={<Avatar><Fax/></Avatar>}
                                 label="Fax"
                                 style={{fontSize: 14}}
-                                onClick={() => {/*noop*/}}
+                                onClick={() => {/*noop*/
+                                }}
                             />&nbsp;&nbsp;
                             <Chip
-                                avatar={<Avatar><Email /></Avatar>}
+                                avatar={<Avatar><Email/></Avatar>}
                                 label="Email"
                                 style={{fontSize: 14}}
-                                onClick={() => {/*noop*/}}
+                                onClick={() => {/*noop*/
+                                }}
                             />
 
                         </div>

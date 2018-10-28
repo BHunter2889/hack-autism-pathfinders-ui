@@ -19,21 +19,23 @@ code {
 
 .app-body {
     text-align: center;
+    overflow: auto;
 }
 
 .team-dashboard-container {
     padding-top: 20px;
     height: calc(100vh - 350px);
+    min-height: 400px;
 }
 
 .upcoming-events-container {
     padding-top: 20px;
     height: 345px;
-    overflow: hidden;
 }
 
 .team-member-profile-thumbnail {
     display: inline-block;
+    margin-right: 30px;
 }
 
 .profile-image-circle-mini {
