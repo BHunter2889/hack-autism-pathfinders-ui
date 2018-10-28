@@ -1,29 +1,53 @@
-import React, {Component} from 'react';
-import Modal from "@material-ui/core/es/Modal/Modal";
-import Typography from "@material-ui/core/es/Typography/Typography";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import {Modal} from "react-bootstrap";
 
-class TeamMemberModalComponent extends Component {
+
+class SimpleModal extends React.Component {
+    state = {
+        open: false,
+    };
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     render() {
-        const {show, member, onClose} = this.props;
-       // TODO - get this working and properly formatted
+        const {show, member, onClose, container } = this.props;
+
         return (
-            <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={show}
-                onClose={onClose}
-            >
-                <div>
-                    <Typography variant="h6" id="modal-title">
-                        {member && member.name}
-                    </Typography>
-                    <Typography variant="subtitle1" id="simple-modal-description">
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </div>
-            </Modal>
+            <div>
+                <Modal
+                    show={show}
+                    onHide={onClose}
+                    container={container}
+                    aria-labelledby="contained-modal-title"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title">
+                            Contained Modal
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id
+                        ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={onClose}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         );
     }
 }
 
-export default TeamMemberModalComponent;
+SimpleModal.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default SimpleModal;

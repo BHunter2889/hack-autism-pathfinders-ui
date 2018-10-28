@@ -8,8 +8,14 @@ function getPassport(queryFunc) {
     clientSecret:process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.HOST+'/auth/google/callback'
   },(accessToken,refreshToken,profile,cb)=>{
+
+  // todo store the following in the db
+  // profile.photos[0].value
+  // profile.familyName
+  // profile.givenName
+
     //The verify callback must call cb providing a user to complete authentication.
-		const email=profile.emails.find(email=>email.value.substring(email.value.length-13)=='@1904labs.com')
+		const email=profile.emails.find(e=>e.type=='account').value
 	if(email !== undefined) {
 		queryFunc({
 			text:`SELECT * FROM ${process.env.DBSCHEMA}.user WHERE google_id=$1`,
@@ -35,7 +41,7 @@ function getPassport(queryFunc) {
 			}
 		  }).catch(e=>{console.log(e); cb(e);})
 	} else {
-		cb('you must log in with a 1904labs account to use this service')
+		cb('you must have an email to log into this service')
 	}
   }))
 
