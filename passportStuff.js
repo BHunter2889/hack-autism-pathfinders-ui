@@ -1,6 +1,7 @@
 require('dotenv').config()
 const passport=require('passport')
 const GoogleStrategy=require('passport-google-oauth20').Strategy
+const buildInitialFolder=require('./buildInitialFolder')
 
 function getPassport(queryFunc) {
   passport.use(new GoogleStrategy({
@@ -17,6 +18,7 @@ function getPassport(queryFunc) {
     //The verify callback must call cb providing a user to complete authentication.
 		const email=profile.emails.find(e=>e.type=='account').value
 	if(email !== undefined) {
+
 		queryFunc({
 			text:`SELECT * FROM ${process.env.DBSCHEMA}.user WHERE google_id=$1`,
 			values:[profile.id]
@@ -31,10 +33,23 @@ function getPassport(queryFunc) {
 					cb(undefined,Object.assign(result.rows[0],{token:accessToken,refreshToken}))
 				})
 			} else {
-			  queryFunc({
-					text:`INSERT INTO ${process.env.DBSCHEMA}.user (id,email,google_id,token,refreshToken) VALUES (nextval('${process.env.DBSCHEMA}.user_id_seq'),$1,$2,$3,$4) RETURNING id`,
-					values:[email,profile.id,accessToken,refreshToken]
-				})
+			  buildInitialFolder(accessToken).then((result)=>{
+			    return queryFunc({
+                 					text:`INSERT INTO ${process.env.DBSCHEMA}.user (id,email,name,google_id,token,refreshToken,image_url,pathbinder_folder_id,documents_folder_id,sqlite_file_id) VALUES (nextval('${process.env.DBSCHEMA}.user_id_seq'),$1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,
+                 					values:[
+                 					email,
+                 					profile.givenName,
+                 					profile.id,
+                 					accessToken,
+                 					refreshToken,
+                 					((profile.photos && profile.photos[0]) ? profile.photos[0].value : null),
+                 					result.pathBinderFolder,
+                 					result.documentSubfolder,
+                 					result.sqlite
+                 					]
+                 				})
+			  })
+
 				.then((result)=>{
 				  cb(undefined,result.rows[0])
 				}).catch(e=>{console.log(e); cb(e);})

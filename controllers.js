@@ -73,6 +73,7 @@ async function getContacts(req,res) {
     {name:'Sean Walsh',numbers:['324-441-6545'],imgUrl:'https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png',address:'765 mockingbird lane'}
   ])
 }
+
 //getUser
 async function getUser(req,res) {
   res.json(

@@ -8,6 +8,7 @@ function addQueryParams(params) {
 		.reduce((paramArr,paramName)=>paramArr.concat(`${paramName}=${encodeURIComponent(params[paramName])}`),[])
 		.join('&')
 }
+
 function makeDriveCallRaw(folderId,token,isForFolders,cb) {
 	const equalsOrNot = isForFolders ? '=' : '!='
 	const options= {
@@ -45,10 +46,8 @@ function makeDriveCallRaw(folderId,token,isForFolders,cb) {
 	});
 	req.end();
 }
-const makeDriveCall=util.promisify(makeDriveCallRaw)
 
 function getFolderNameRaw(folderId,token,cb) {
-console.log('folderId: ',folderId)
 	const options= {
 		hostname:'www.googleapis.com',
 		port:443,
@@ -80,14 +79,8 @@ console.log('folderId: ',folderId)
 	});
 	req.end();
 }
-const getFolderName=util.promisify(getFolderNameRaw)
-
-async function getFolderContents(folderId,name,token) {
-	const d=await makeDriveCall(folderId,token,true)
-	return d
-}
 
 module.exports={
-	getFolderName,
-	getFolderContents
+	getFolderName:util.promisify(getFolderNameRaw),
+	getFolderContents:util.promisify(makeDriveCallRaw)
 }
