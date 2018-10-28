@@ -69,3 +69,20 @@ code {
 .modal-container .modal, .modal-container .modal-backdrop {
     position: absolute;
 }
+
+.events-container {
+    width: 100%;
+    height: 160px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-left: 20px;
+    padding-right: 75px;
+}
+.calendar-card {
+    display: inline-block;
+    width: 400px;
+    margin: 5px;
+    height: 150px;
+    margin-right: 20px;
+}

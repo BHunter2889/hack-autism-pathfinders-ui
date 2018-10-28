@@ -17,11 +17,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {getSideMenuNavItems} from '../SideMenuNavItems';
-import ContactsContainer from "../containers/ContactsContainer";
 import DocsContainer from "../containers/DocsContainer";
-import FormsContainer from "../containers/FormsContainer";
 import ComingSoonComponent from "./ComingSoonComponent";
 import BinderComponent from './BinderComponent';
+import FormByIdContainer from "../containers/FormByIdContainer";
 
 export const ROUTE_HOME = '/home';
 export const ROUTE_DOCS = '/docs';
@@ -29,6 +28,8 @@ export const ROUTE_FORMS = '/forms';
 export const ROUTE_CONTACTS = '/contacts';
 export const ROUTE_CALENDAR = '/calendar';
 export const ROUTE_FAVORITES = '/favorites';
+
+export const ROUTE_FORM_CREATE = `${ROUTE_FORMS}/create`;
 
 const drawerWidth = 240;
 
@@ -115,26 +116,28 @@ class AppComponent extends React.Component {
         props.fetchTeam();
         props.fetchContacts();
         props.fetchUpcomingEvents();
-
-        this.updateDimensions = this.updateDimensions.bind(this);
-        this.lastHeight = this.height = window.innerHeight;
-        this.updateDimensions();
+        //
+        // this.updateDimensions = this.updateDimensions.bind(this);
+        // this.height = window.innerHeight;
+        // this.isTall = this.height > 800;
+        // props.updateDimensions({width: window.innerWidth, height: window.innerHeight});
     }
 
-    updateDimensions() {
-        const {updateDimensions} = this.props;
-        this.height = window.innerHeight;
-        if ((this.lastHeight > 800 && this.height < 800) ||
-            (this.lastHeight < 800 && this.height > 800)) {
-            updateDimensions({width: window.innerWidth, height: window.innerHeight});
-        }
-    }
-    componentDidMount() {
-        window.addEventListener("resize", this.updateDimensions);
-    }
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions);
-    }
+    // updateDimensions() {
+    //     const {updateDimensions} = this.props;
+    //     this.height = window.innerHeight;
+    //     if ((this.isTall && this.height < 800) ||
+    //         (!this.isTall && this.height > 800)) {
+    //         updateDimensions({width: window.innerWidth, height: window.innerHeight});
+    //     }
+    //     this.lastHeight = this.height;
+    // }
+    // componentDidMount() {
+    //     window.addEventListener("resize", this.updateDimensions);
+    // }
+    // componentWillUnmount() {
+    //     window.removeEventListener("resize", this.updateDimensions);
+    // }
 
     state = {
         open: false,
@@ -152,7 +155,7 @@ class AppComponent extends React.Component {
         const {classes, theme} = this.props;
 
         return (
-            <div className={classes.root}>
+            <div className={classes.root} style={{width: "100vw"}}>
                 <AppBar
                     position="absolute"
                     className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
@@ -186,17 +189,16 @@ class AppComponent extends React.Component {
                     </div>
                     <Divider/>
                     <List>{getSideMenuNavItems()}</List>
-                    {/*<Divider/>*/}
-                    {/*<List>{otherMailFolderListItems}</List>*/}
                 </Drawer>
-                <main className={classes.content}>
+                <main className={classes.content} style={{width: "100%"}}>
                     <div className={classes.toolbar}/>
                     <div className="app-body">
                         <Router history={history}>
                             <Switch>
                                 <Route path={ROUTE_HOME} component={HomeContainer}/>
-                                <Route path={ROUTE_CONTACTS} component={ContactsContainer}/>
+                                <Route path={ROUTE_CONTACTS} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_DOCS} component={DocsContainer}/>
+                                <Route path={`${ROUTE_FORM_CREATE}/:id`} component={FormByIdContainer}/>
                                 <Route path={ROUTE_FORMS} component={BinderComponent}/>
                                 <Route path={ROUTE_CALENDAR} component={ComingSoonComponent}/>
                                 <Route path={ROUTE_FAVORITES} component={ComingSoonComponent}/>
