@@ -3,7 +3,7 @@ const {downloadFromDrive,uploadToDrive}=require('./driveUploader')
 const {convert,switchKeys}=require('./convertSqliteResult')
 const crypto=require('./crypto')
 const {pool,query}=require('./query')
-//getDocs
+//getDocs can be invoked at /api/docs
 async function getDocs(req,res) {
   res.json([
     {id:1234,title:"title1",category:"cat1",path:"http://www.example.com"},
@@ -12,12 +12,12 @@ async function getDocs(req,res) {
     {id:1234,title:"title4",category:"cat3",path:"http://www.example.com"}
   ])
 }
-//getPrintableDocs
+//getPrintableDocs can be invoked at /api/printableDocs
 async function getPrintableDocs(req,res) {
   res.contentType('application/pdf')
   res.end(fs.readFileSync('./test.pdf'),'binary')
 }
-//getForms
+//getForms can be invoked at /api/forms
 async function getForms(req,res) {
   if(req.user) {
   console.log('1')
@@ -40,7 +40,7 @@ async function getForms(req,res) {
           ])
     }
 }
-//getForm
+//getForm can be invoked at /api/form/:id
 async function getForm(req,res) {
   if(req.user) {
     const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
@@ -55,11 +55,11 @@ async function getForm(req,res) {
         })
   }
 }
-//getEvents
+//getEvents can be invoked at /api/events
 async function getEvents(req,res) {
   res.json(JSON.parse(fs.readFileSync('./calendarResponse.json','utf8')))
 }
-//getTeam
+//getTeam can be invoked at /api/team
 async function getTeam(req,res) {
   res.json([
   {
@@ -91,7 +91,7 @@ async function getTeam(req,res) {
   }
   ])
 }
-//getContacts
+//getContacts can be invoked at /api/contacts
 async function getContacts(req,res) {
   res.json([
     {name:'Gordon Blair',numbers:['324-441-2321'],imgUrl:'https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png',address:'8583 mockingbird lane'},
@@ -101,26 +101,26 @@ async function getContacts(req,res) {
   ])
 }
 
-//getUser
+//getUser can be invoked at /api/user
 async function getUser(req,res) {
   res.json(
     {name:'Simon',imgUrl:'https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png'})
 }
 
-//addCalEvent
+//addCalEvent can be invoked at /api/addCalEvent
 async function addCalEvent(req,res) {
    res.status(201).end();
 }
-//addDoc
+//addDoc can be invoked at /api/addDoc
 async function addDoc(req,res) {
   res.status(201).end();
 }
-//addForm
+//addForm can be invoked at /api/addForm
 async function addForm(req,res) {
   try {
   if(req.user) {
       const sqliteDb=await downloadFromDrive(req.user.sqlite_file_id,req.user.token)
-      //todo validate json with tv4 and formSchemas/supportTeamMember.json
+      //todo: check the form type being sent in and validate the info with the schemas in /formSchemas using tv4
       const inserted=sqliteDb.exec(`INSERT INTO form (form_template_id,data) VALUES (${req.body.formTemplateId || 7},'${JSON.stringify(req.body.data)}'); SELECT last_insert_rowid();`)
       console.log('inserted is ',inserted[0].values[0][0])
       const uploadResponse= await uploadToDrive(
