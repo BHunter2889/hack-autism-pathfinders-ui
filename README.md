@@ -3,7 +3,7 @@ Heroku App: https://hack-autism-pathfinders-app.herokuapp.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#Running the App For The First Time
+# Running the App For The First Time
 First you need a .env file that looks something like this:
 ```
 SESSION_SECRET='replace this with a very secure secret, maybe a hash or something'
@@ -17,16 +17,16 @@ HOST='set this to whatever host address you have for whatever environment you ar
 
 DATABASE_URL=postgres://username:password@db-host-url.com:5432/databaseName
 ```
-DON'T COMMIT THE .env FILE. IT IS FOR LOCAL DEV ONLY. WHATEVER YOU DEPLOY IT TO SHOULD HAVE ITS OWN MORE SECURE WAY OF SETTING ENVIRONMENT VARIABLES.
-
-see the dotenv npm package for more information on the .env file
+DON'T COMMIT THE .env FILE. IT IS FOR LOCAL DEV ONLY. WHATEVER YOU DEPLOY IT TO SHOULD HAVE ITS OWN MORE SECURE WAY OF SETTING ENVIRONMENT VARIABLES. See the [dotenv](https://www.npmjs.com/package/dotenv) npm package for more information on the .env file
 
 For the google API client credentials mentioned in this file, see https://developers.google.com/identity/protocols/OpenIDConnect
+
 Be sure to enable the following APIs in the API dashboard of your google cloud console:
  - Google Drive API
  - Google Contacts API
  - Google Calendar API
  - Google Plus API
+ 
 Be sure to also attach a billing account to your gcp project: https://cloud.google.com/billing/docs/how-to/manage-billing-account
 
 Also, in order to use these APIs, you can't be calling them from your local computer (i.e. Google requires the call to originate from a public domain). I suggest you use ngrok for local development.
@@ -43,7 +43,7 @@ This app has a central database to keep track of sessions and users. To set up t
 
 Then run `npm install; npm run build; npm run start` and it should run
 
-#Things to do
+# Things to do
 
 See the github issues associated with this project here: https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues
 
