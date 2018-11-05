@@ -48,3 +48,11 @@ Then run `npm install; npm run build; npm run start` and it should run
 See the github issues associated with this project here: https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues
 
 Here is what we consider their order of importance:
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/12
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/9
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/6
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/4
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/11
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/8
+ 1. https://github.com/BHunter2889/hack-autism-pathfinders-ui/issues/15
+ 1. the rest
