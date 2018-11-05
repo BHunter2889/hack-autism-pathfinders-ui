@@ -23,7 +23,7 @@ For the google API client credentials mentioned in this file, see https://develo
 
 Be sure to enable the following APIs in the API dashboard of your google cloud console:
  - Google Drive API
- - Google Contacts API
+ - Google People API
  - Google Calendar API
  - Google Plus API
  
