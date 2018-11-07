@@ -1,3 +1,10 @@
+// This component is not used in our current implementation of the UI. The original plan was to recreate what
+// we were calling "boards" which represent the colored internal binders of the bigger pathbinder. Upon finding out that there wasn't
+// a defined structure to how they should be used, we abandoned this idea. However, if you want to begin storing more user preferences,
+// you could start allowing this component to be customized with color and labels. The intent was to put what was on the forms page
+// and possibly the documents page into the appropriate binder boards, but with customization this was too much effort for the hackathon
+// though significant effort went into creating and styling this component. It is yours to do with as you wish, including deleting this 
+// blob of commented text.
 // Contains vertical tabs component which holds all board components.
 // Tab switch logic is inside this BinderComponent
 import React from 'react';
